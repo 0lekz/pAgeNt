@@ -17,5 +17,11 @@ def ask(prompt: str, model: str = "phi3") -> str:
 
 
 if __name__ == "__main__":
-    print(ask(input("> ")))
-    
+    while True:
+        command = input("> ")
+        if command == "/quit":
+            break
+        if command == "/help":
+            print("...")
+            continue
+        print(ask(command))
