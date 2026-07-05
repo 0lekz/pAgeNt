@@ -110,6 +110,19 @@ Recommendation: pick the model empirically (e.g. compare a couple of small model
 Tradeoff: planning is the hardest part of an agent and the easiest to over-build.
 Recommendation: no explicit planner in v1; the ReAct loop *is* the planning. Revisit only when a concrete task needs multi-step look-ahead.
 
+### D5. Conversation memory strategy (short-term and long-term)
+
+Tradeoff: naive full-history resend hits context window limits and wastes tokens as a conversation grows; more sophisticated strategies cost engineering effort, and some of them depend on the model reliably judging its own conversation, which isn't proven yet.
+Candidate techniques, roughly cheapest/most deterministic first:
+- Sliding window truncation - keep the last N turns, drop the oldest. No model judgment required.
+- Explicit `/remember` command - user-triggered, writes straight to a memory file. No model judgment required.
+- Rolling summarization - periodically compress older turns into a running summary before they fall out of the window. Needs an extra LLM call and a tuned trigger cadence, but no tool-calling dependency.
+- Model-triggered memory writes - the LLM itself detects "this should be remembered" and calls a memory tool. Depends on reliable tool-calling (see D1, D3, #6).
+- Relevance/salience pruning - flag off-topic turns (e.g. a weather tangent mid-physics-discussion) so they're excluded from context sent to the model without deleting them from the log. Hardest: requires a judgment step (heuristic, cheap classifier, or the main LLM) on every turn.
+
+Recommendation: build the two judgment-free techniques (sliding window, explicit `/remember`) first; defer model-triggered memory and relevance pruning until tool-calling reliability is settled.
+Tracked in issue #10.
+
 ## Non-goals (for now)
 
 - No GUI; CLI only.
