@@ -14,14 +14,3 @@ def ask(prompt: str, model: str = "phi3") -> str:
 
     except Exception as e:
         raise RuntimeError(f"Ollama call failed: {e}") from e
-
-
-if __name__ == "__main__":
-    while True:
-        command = input("> ")
-        if command == "/quit":
-            break
-        if command == "/help":
-            print("...")
-            continue
-        print(ask(command))
