@@ -1,7 +1,7 @@
 import ollama
 
 
-def ask(prompt: str, model: str = "phi3") -> str:
+def ask(prompt: str, model: str) -> str:
     """Send a single prompt to a local Ollama model and return the reply text."""
 
     try:
