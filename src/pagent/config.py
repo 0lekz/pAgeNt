@@ -9,6 +9,7 @@ class Settings:
     model: str
     ollama_host: str | None
     data_dir: Path
+    log_level: str
 
 
 def load_settings() -> Settings:
@@ -19,4 +20,7 @@ def load_settings() -> Settings:
     ollama_host = os.getenv("OLLAMA_HOST", None)
     data_dir = Path(os.getenv("PAGENT_DATA_DIR", "~/.pagent")).expanduser()
     data_dir.mkdir(parents=True, exist_ok=True)  # Ensure the data directory exists
-    return Settings(model=model, ollama_host=ollama_host, data_dir=data_dir)
+    log_level = str(os.getenv("PAGENT_LOG_LEVEL", "INFO"))  # Default to INFO level
+    return Settings(
+        model=model, ollama_host=ollama_host, data_dir=data_dir, log_level=log_level
+    )
