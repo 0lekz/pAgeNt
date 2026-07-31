@@ -1,0 +1,31 @@
+[
+    {"id": "p1", "category": "should_call", 
+        "prompt": "What's the weather in Victoria?", "expected_tool": "get_weather", "expected_args": {"location": "Victoria"}},
+    
+    {"id": "p2", "category": "should_call", 
+        "prompt": "Can you check the temperature in Tokyo right now?", "expected_tool": "get_weather", "expected_args": {"location": "Tokyo"}},
+    
+    {"id": "p3", "category": "should_call",
+        "prompt": "Open notes.pdf and tell me what's in it.", "expected_tool": "read_pdf", "expected_args": {"path": "notes.pdf"}},
+    
+    {"id": "p4", "category": "should_not_call",
+        "prompt": "Explain what rain is.", "expected_tool": null},
+    
+    {"id": "p5", "category": "should_not_call",
+        "prompt": "What's the capital of France?", "expected_tool": null},
+   
+    {"id": "p6", "category": "should_not_call",
+        "prompt": "Write me a haiku about the ocean.", "expected_tool": null},
+    
+    {"id": "p7", "category": "multi_tool",
+        "prompt": "Read notes.pdf and summarize it into summary.md", "expected_tool": ["read_pdf", "write_file"]},
+    
+    {"id": "p8", "category": "multi_tool",
+        "prompt": "Check the weather in Paris and save it to weather.md", "expected_tool": ["get_weather", "write_file"]},
+    
+    {"id": "p9", "category": "should_call",
+        "prompt": "Save the text 'Buy milk tomorrow' into a file called todo.md", "expected_tool": "write_file", "expected_args": {"path": "todo.md", "content": "Buy milk tomorrow"}},
+        
+    {"id": "p10", "category": "ambiguous",
+        "prompt": "Where is my physics PDF?", "expected_tool": null}
+]
