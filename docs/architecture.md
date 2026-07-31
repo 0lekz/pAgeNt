@@ -123,6 +123,11 @@ Candidate techniques, roughly cheapest/most deterministic first:
 Recommendation: build the two judgment-free techniques (sliding window, explicit `/remember`) first; defer model-triggered memory and relevance pruning until tool-calling reliability is settled.
 Tracked in issue #10.
 
+### D6. LLM provider abstraction (deferred)
+
+Tradeoff: an `LLMClient` interface (Ollama today, other providers like OpenAI later) would decouple the Controller from Ollama-specific calls, but building it now means maintaining an abstraction with only one real implementation behind it - pure overhead until a second provider actually exists.
+Recommendation: don't build it yet. It conflicts with the current non-goal below (local Ollama only); revisit if and when that non-goal is revisited.
+
 ## Non-goals (for now)
 
 - No GUI; CLI only.
