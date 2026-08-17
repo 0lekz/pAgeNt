@@ -27,5 +27,35 @@
         "prompt": "Save the text 'Buy milk tomorrow' into a file called todo.md", "expected_tool": "write_file", "expected_args": {"path": "todo.md", "content": "Buy milk tomorrow"}},
         
     {"id": "p10", "category": "ambiguous",
-        "prompt": "Where is my physics PDF?", "expected_tool": null}
+        "prompt": "Where is my physics PDF?", "expected_tool": null},
+
+    {"id": "p11", "category": "should_call",
+        "prompt": "What files are in my Documents folder?", "expected_tool": "list_directory", "expected_args": {"path": "Documents"}},
+
+    {"id": "p12", "category": "should_call",
+        "prompt": "Can you read my lecture_notes.md and summarize it?", "expected_tool": "read_file", "expected_args": {"path": "lecture_notes.md"}},
+
+    {"id": "p13", "category": "should_call",
+        "prompt": "Run this for me: print('hello')", "expected_tool": "run_code", "expected_args": {"code": "print('hello')", "language": "python"}},
+
+    {"id": "p14", "category": "should_call",
+        "prompt": "Save this function to helper.py: def add(a,b): return a+b", "expected_tool": "write_file", "expected_args": {"path": "helper.py", "content": "def add(a,b): return a+b"}},
+
+    {"id": "p15", "category": "should_call",
+        "prompt": "What's the latest stable version of Python?", "expected_tool": "web_search", "expected_args": {"query": "python version"}},
+
+    {"id": "p16", "category": "should_call",
+        "prompt": "Is it true the Great Wall of China is visible from space?", "expected_tool": "fact_check", "expected_args": {"claim": "great wall of china"}},
+
+    {"id": "p17", "category": "should_not_call",
+        "prompt": "What does a for loop do?", "expected_tool": null},
+
+    {"id": "p18", "category": "should_not_call",
+        "prompt": "What's 7 times 8?", "expected_tool": null},
+
+    {"id": "p19", "category": "ambiguous",
+        "prompt": "Is my code correct?", "expected_tool": null},
+
+    {"id": "p20", "category": "multi_tool",
+        "prompt": "Search for the current Python version and save it to versions.md", "expected_tool": ["web_search", "write_file"]}
 ]

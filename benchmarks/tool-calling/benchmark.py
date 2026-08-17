@@ -36,7 +36,7 @@ def grade(prompt, tool_calls):
         args_valid = True
         for key, expected_val in prompt["expected_args"].items():
             actual_val = actual_args.get(key, "")
-            if key == "content":
+            if key in ("content", "query", "claim"):
                 args_valid &= bool(actual_val.strip())
             else:
                 args_valid &= expected_val.lower() in actual_val.lower()
@@ -77,4 +77,4 @@ for each_prompt in prompts:
             "timestamp": time.time(),
         })
       
-pd.DataFrame(results).to_csv(BENCH_DIR / "benchmark_results.csv", index=False)
+pd.DataFrame(results).to_csv(BENCH_DIR / "benchmark_results_gemma4-12b.csv", index=False)
