@@ -46,26 +46,28 @@ def grade(prompt, tool_calls):
 BENCH_DIR = Path(__file__).parent
 prompts = load_json(BENCH_DIR / "prompts.json")
 tools = load_json(BENCH_DIR / "tools.json")
-model = "gemma4:12b"  # one model per run
+model = "qwen3:14b"  # one model per run
 N = 5  # number of runs per prompt
 
 results = []
 for each_prompt in prompts:
     for i in range(N):
         start = time.perf_counter()
-        response = ollama.chat(
-            model=model,
-            messages=[{"role": "user", "content": each_prompt["prompt"]}],
-            tools=tools,
-        )
+        try: 
+            response = ollama.chat(
+                model=model,
+                messages=[{"role": "user", "content": each_prompt["prompt"]}],
+                tools=tools,
+            )
+            actual_tool_calls = response.message.tool_calls
+            grading = grade(each_prompt, actual_tool_calls)
+        except ollama.ResponseError as e:
+            actual_tool_calls = None
+            grading = {"correct_tool": False, "args_valid": None, "note": f"parse_error: {e}"}
+
         latency = time.perf_counter() - start
         print(f"Prompt: {each_prompt['id']}, Latency: {latency}")
 
-        actual_tool_calls = response.message.tool_calls  # None or list
-        # continue with grading this run against prompt["expected_tool"] / expected_args
-        # append results to a list for later analysis
-
-        grading = grade(each_prompt, actual_tool_calls)
         results.append({
             "model": model,
             "prompt_id": each_prompt["id"],
@@ -76,5 +78,5 @@ for each_prompt in prompts:
             "latency": latency,
             "timestamp": time.time(),
         })
-      
-pd.DataFrame(results).to_csv(BENCH_DIR / "benchmark_results_gemma4-12b.csv", index=False)
+        # save each iteration to have results in case of crash
+        pd.DataFrame(results).to_csv(BENCH_DIR / "benchmark_results_qwen3-14b.csv", index=False)     
