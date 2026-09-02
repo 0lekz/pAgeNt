@@ -1,0 +1,17 @@
+model,prompt_id,category,run_index,correct_tool,args_valid,tool_calls,response_content,latency,timestamp
+gemma4:12b,p7,multi_tool,0,False,,"[{""name"": ""read_pdf"", ""arguments"": {""path"": ""notes.pdf""}}]",,20.97750070807524,1787674553.991207
+gemma4:12b,p8,multi_tool,0,False,,"[{""name"": ""get_weather"", ""arguments"": {""location"": ""Paris, France""}}]",,9.83533445908688,1787674563.8466141
+gemma4:12b,p20,multi_tool,0,False,,"[{""name"": ""web_search"", ""arguments"": {""query"": ""current Python version""}}]",,27.426898542093113,1787674591.2793128
+ornith-1.5:9b,p7,multi_tool,0,False,,"[{""name"": ""list_directory"", ""arguments"": {""path"": "".""}}]","I'll help you read the PDF and create a summary. Let me first locate the file and read its contents.
+
+",12.002057166071609,1787674603.285717
+ornith-1.5:9b,p8,multi_tool,0,False,,"[{""name"": ""get_weather"", ""arguments"": {""location"": ""Paris, France"", ""unit"": ""celsius""}}]",,7.1518349999096245,1787674610.441698
+ornith-1.5:9b,p20,multi_tool,0,False,,"[{""name"": ""web_search"", ""arguments"": {""query"": ""current latest stable Python version release""}}, {""name"": ""list_directory"", ""arguments"": {""path"": "".""}}]","I'll help you search for the current Python version and save it to `versions.md`. Let me start by searching for the latest Python version and checking my workspace directory at the same time.
+
+",8.498775665881112,1787674618.943764
+qwen3.5:9b,p7,multi_tool,0,False,,"[{""name"": ""read_pdf"", ""arguments"": {""path"": ""./notes.pdf""}}]",,22.20335187483579,1787674641.150949
+qwen3.5:9b,p8,multi_tool,0,False,,"[{""name"": ""get_weather"", ""arguments"": {""location"": ""Paris, France""}}]",,10.040441749850288,1787674651.201254
+qwen3.5:9b,p20,multi_tool,0,False,,"[{""name"": ""web_search"", ""arguments"": {""query"": ""current latest Python version 2024""}}]",,7.6612903331406415,1787674658.8661509
+qwen3:14b,p7,multi_tool,0,False,,"[{""name"": ""read_pdf"", ""arguments"": {""path"": ""notes.pdf""}}]",,103.86000333307311,1787674762.7300422
+qwen3:14b,p8,multi_tool,0,True,,"[{""name"": ""get_weather"", ""arguments"": {""location"": ""Paris"", ""unit"": ""celsius""}}, {""name"": ""write_file"", ""arguments"": {""path"": ""weather.md"", ""content"": ""{'temperature': 15, 'condition': 'Partly Cloudy'}""}}]",,40.35370475007221,1787674803.089246
+qwen3:14b,p20,multi_tool,0,False,,"[{""name"": ""web_search"", ""arguments"": {""query"": ""current Python version""}}]",,27.27502587507479,1787674830.368804
