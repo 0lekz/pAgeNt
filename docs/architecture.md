@@ -100,10 +100,10 @@ Recommendation: **LLM-driven, minimal ReAct loop for v1.** Treat explicit Planni
 Tradeoff: separate process gives real isolation and reusability but adds transport and complexity; in-process is simpler for a single-user CLI but loses the isolation benefit.
 Recommendation: start in-process to learn the protocol shape, then promote to a separate process once the tool surface is stable.
 
-### D3. Ollama model choice and tool-calling reliability
+### D3. Ollama model choice and tool-calling reliability - decided
 
 Tradeoff: local models vary a lot in how reliably they emit well-formed tool calls; a weaker model forces the Controller to enforce more structure (strict parsing, retries).
-Recommendation: pick the model empirically (e.g. compare a couple of small models on a fixed tool-calling test) and record findings as a `research` issue.
+Decided: `qwen3.5:9b` is the default, `qwen3:14b` the escalation option - see `docs/decisions.md`.
 
 ### D4. Planning as its own component
 
@@ -122,6 +122,7 @@ Candidate techniques, roughly cheapest/most deterministic first:
 
 Recommendation: build the two judgment-free techniques (sliding window, explicit `/remember`) first; defer model-triggered memory and relevance pruning until tool-calling reliability is settled.
 Tracked in issue #10.
+Storage for whatever is remembered is settled separately: MongoDB, see `docs/decisions.md`.
 
 ### D6. LLM provider abstraction (deferred)
 
@@ -138,4 +139,5 @@ Recommendation: don't build it yet. It conflicts with the current non-goal below
 ## Related documents
 
 - `docs/roadmap.md` - the phased learning path that leads to this architecture.
+- `docs/decisions.md` - the log of decisions that are settled.
 - GitHub Issues / Milestones - the living near-term task list.
